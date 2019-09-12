@@ -135,3 +135,16 @@ wateravailabily.forecast <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vROD3ePdtl-0b8B8ieyo9bPjCgXgZCXx0Q6869WTM3UqMBg1lID2T2UX8k0MskvwQ/pub?gid=195587449&single=true&output=csv"
 ) %>% 
   subset( Name  %in% sa.countries)
+
+
+##
+## CRI
+## Source: Germanwatch
+
+cri.score <- read_csv(
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQvocPpyIUr_Vo5YeVfTEgi7GEmjiFu6jkO3K_Z1u0i7mzu5Nb6Ju0gbzRj9f67z2uMyBc0D20AAjF0/pub?gid=0&single=true&output=csv"
+)
+
+cri.score$cri_score <- as.numeric(as.character(cri.score$cri_score))
+
+
