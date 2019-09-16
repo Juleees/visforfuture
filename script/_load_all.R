@@ -9,19 +9,25 @@ sa.countries <- c("Latin America and the Caribbean", "South America",
 
 ##
 ### CO2 Emissions 
-co2.emissions <- read_csv(
+past.co2.emissions <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQrCWZIziIphRJf5VusYOkeqeyFHn9Mu7e0hMwUn1WNsWQ5Tvnm8kgvQT6CucMRyw/pub?gid=241499434&single=true&output=csv"
 ) %>% subset(`Country Name` %in% sa.countries)
 
 
-sa.codes <- co2.emissions$`Country Code`
+past.co2.emissions.edgar <- read_csv(
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQM1NHsby9rGPsy1u7KbEiTalWDHAeUP1oDTPZmaK_WoIOUqugKjcbGqO9MKnfuLA/pub?gid=4911012&single=true&output=csv"
+) %>% subset(country_name %in% sa.countries)
+
+
+
+sa.codes <- past.co2.emissions$`Country Code`
 
 
 ##
 ### Temperature: Historic and Forecasted
 ###
 
-historic.temps <- read_csv(
+past.temps <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTK88_VAPq64Ynx9-3KvLkbbgXVj0vqKLbZkPEY-f75_9oziJwn1KXnbuK_lxO1DT3EFb2ijwNxv9yf/pub?gid=119339870&single=true&output=csv"
 )%>% subset( Country %in% sa.countries)
 
@@ -36,7 +42,7 @@ future.temps <- read_csv(
 ## Source: FAO
 
 
-forest.area.change <- read_csv(
+past.forest.area.change <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9hhXZnnSXLwTNqgC7LshGk4T2lFcSSGGehaODKQI3Z1i8Lj-u2At2J36oEp2vA5xSpaAgNH4sSmbu/pub?gid=882232606&single=true&output=csv"
 ) %>% 
   subset( Entity  %in% sa.countries)
@@ -47,7 +53,7 @@ forest.area.change <- read_csv(
 ## IUCN Red List
 ## Source: IUCN
 
-endangered.species <- read_csv(
+past.endangered.species <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRPNNZgi-QzPv2XIL0V-sBYh9bjdREZTiEyYau18U81IvcTm4nrZazoB50KWQTDs--hmX4avWWW76lj/pub?gid=126816506&single=true&output=csv"
 ) %>% 
   subset( Entity  %in% sa.countries)
@@ -57,9 +63,9 @@ endangered.species <- read_csv(
 
 #
 ## Renewable Energy
-## Source: IUCN
+## Source: WB
 
-renewable.energy.perc <- read_csv(
+past.renewable.energy.perc <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSMlEG1R9u2xM96yZJJFKv3e7Z8PPzjWj-VgslOKduS3XbEd8tmQ-ln6LFeZsJsAA/pub?gid=603083004&single=true&output=csv"
 ) %>% 
   subset( `Country Name`  %in% sa.countries)
@@ -70,13 +76,13 @@ renewable.energy.perc <- read_csv(
 ## Sea Level Rise
 ## Source: WB
 
-sealevelrise.land <- read_csv(
+future.sealevelrise.land <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSiG4kAW772UuqbPX6qwmCGzmG9UokcJroGy4sKv39PHIixvP_C6BMAPHSmMOZ-HA/pub?gid=515851616&single=true&output=csv"
 ) %>% 
   subset( countryname  %in% sa.countries)
 
 
-sealevelrise.pop<- read_csv(
+future.sealevelrise.pop<- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSiG4kAW772UuqbPX6qwmCGzmG9UokcJroGy4sKv39PHIixvP_C6BMAPHSmMOZ-HA/pub?gid=1107893548&single=true&output=csv"
 ) %>% 
   subset( countryname  %in% sa.countries)
@@ -88,7 +94,7 @@ sealevelrise.pop<- read_csv(
 ## Protected Terrestrial Area
 ## Source: WB
 
-protected.area <- read_csv(
+past.protected.area <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQCDBjKa-W72vMltqyxtxaHMuAGEzS3GlMtdcAN5WlGHw2UX4GYA5nolMr29HNfm98XlmScBgNZV6Fz/pub?gid=1466645411&single=true&output=csv"
 ) %>% 
   subset( Entity  %in% sa.countries)
@@ -104,13 +110,13 @@ protected.area <- read_csv(
 ## Source: UN
 ## In the 1000
 
-pop.historic <- read_csv(
+past.pop.historic <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgWsKgsI1hbUu_WZQ9LSXciv5ylJQWySYjAc6ZKMd5EeAkP8S45UysPYyPU7rE4w/pub?gid=16662483&single=true&output=csv"
 )%>% 
   subset( region  %in% sa.countries)
 
 
-pop.forecast <- read_csv(
+future.pop.forecast <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgWsKgsI1hbUu_WZQ9LSXciv5ylJQWySYjAc6ZKMd5EeAkP8S45UysPYyPU7rE4w/pub?gid=1003568403&single=true&output=csv"
 )%>% 
   subset( region  %in% sa.countries)
@@ -125,13 +131,13 @@ pop.forecast <- read_csv(
 ##
 
 
-wateravailabily.current <- read_csv(
+past.wateravailabily.current <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRoXnZn7nAwK43uOeJfsf0BWIavRMKuaMuRY1V-PbU2I9EQD0d7e7vTIxzO6hC4ow/pub?gid=868895140&single=true&output=csv"
 ) %>% 
   subset( name  %in% sa.countries)
 
 
-wateravailabily.forecast <- read_csv(
+future.wateravailabily.forecast <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vROD3ePdtl-0b8B8ieyo9bPjCgXgZCXx0Q6869WTM3UqMBg1lID2T2UX8k0MskvwQ/pub?gid=195587449&single=true&output=csv"
 ) %>% 
   subset( Name  %in% sa.countries)
@@ -141,10 +147,10 @@ wateravailabily.forecast <- read_csv(
 ## CRI
 ## Source: Germanwatch
 
-cri.score <- read_csv(
+past.cri.score <- read_csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQvocPpyIUr_Vo5YeVfTEgi7GEmjiFu6jkO3K_Z1u0i7mzu5Nb6Ju0gbzRj9f67z2uMyBc0D20AAjF0/pub?gid=0&single=true&output=csv"
 )
 
-cri.score$cri_score <- as.numeric(as.character(cri.score$cri_score))
+past.cri.score$cri_score <- as.numeric(as.character(past.cri.score$cri_score))
 
 
